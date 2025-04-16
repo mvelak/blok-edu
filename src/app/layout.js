@@ -1,4 +1,4 @@
-import './globals.css';
+import "./globals.css";
 
 export const metadata = {
     title: "BlokEDU",
@@ -8,10 +8,12 @@ export const metadata = {
     },
 };
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
     return (
         <html lang="en">
         <body>{children}</body>
         </html>
     );
 }
+
+export default RootLayout;
