@@ -1,14 +1,14 @@
 "use client";
 
 import styled from "styled-components";
-import Navbar from "./_components/navbar";
+import Navbar from "@/components/navbar";
 
 const Home = () => {
     return (
         <Container>
             <Navbar />
             <HeroContainer>
-                <HeroHeader>Take Ownership of Your Academic Record</HeroHeader>
+                <HeroHeader>Take Ownership of Your Academic Records</HeroHeader>
                 <HeroBody>Upload and verify transcripts on-chain — secure, transparent, and under your control.</HeroBody>
             </HeroContainer>
             <BodyContainer>Body Content</BodyContainer>
@@ -49,13 +49,13 @@ const HeroContainer = styled.div`
     }
 `;
 
-const HeroHeader = styled.h1`
+const HeroHeader = styled.div`
     font-size: 4rem;
     font-weight: 600;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 `;
 
-const HeroBody = styled.h3`
+const HeroBody = styled.div`
     font-size: 2rem;
     font-weight: 400;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);

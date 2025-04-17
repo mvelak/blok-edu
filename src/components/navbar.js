@@ -1,10 +1,16 @@
 "use client";
 
 import styled from "styled-components";
+import { createThirdwebClient } from "thirdweb";
+import { ConnectButton } from "thirdweb/react";
 import {DropdownMenu, DropdownWrapper} from "./dropdown";
 import Button from "./button";
 
 const Navbar = () => {
+    const client = createThirdwebClient({
+        clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
+    });
+
     return (
         <Container>
             <Logo href={"/"}>BlokEDU
@@ -12,12 +18,12 @@ const Navbar = () => {
             </Logo>
             <SearchInput type="text" placeholder="Search for transcripts"/>
             <NavRightSection>
-                <Button>Connect Wallet</Button>
+                <ConnectWalletWrapper><ConnectButton client={client}/></ConnectWalletWrapper>
                 <DropdownWrapper>
-                    <Button>Account</Button>
+                    <Button>Profile</Button>
                     <DropdownMenu items={[
-                        { label: "Profile", href: "/account/profile" },
-                        { label: "Settings", href: "/account/settings" },
+                        { label: "Home", href: "/profile" },
+                        { label: "Settings", href: "/profile/settings" },
                     ]}/>
                 </DropdownWrapper>
             </NavRightSection>
@@ -71,6 +77,34 @@ const SearchInput = styled.input`
 
     &::placeholder {
         color: rgba(255, 255, 255, 0.4);
+    }
+`;
+
+const ConnectWalletWrapper = styled.div`
+    * {
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s ease;
+        min-width: 140px;
+        text-align: center;
+
+
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.12);
+          border-color: gray;
+        }
+    
+        &:active {
+          transform: scale(0.98);
+        } 
     }
 `;
 

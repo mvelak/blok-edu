@@ -1,15 +1,16 @@
 "use client";
 
 import styled from "styled-components";
-import Navbar from "@/app/_components/navbar";
+import Navbar from "@/components/navbar";
 
-const Profile = () => {
+const Settings = () => {
     return (
         <>
             <Navbar />
             <p>Dashboard</p>
         </>
+
     );
 }
 
-export default Profile;
+export default Settings;
