@@ -88,11 +88,11 @@ const ConnectWalletWrapper = styled.div`
         border: 1px solid rgba(255, 255, 255, 0.15);
         color: white;
         font-size: 0.9rem;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
         outline: none;
         transition: all 0.2s ease;
-        min-width: 140px;
+        min-width: 110px;
         text-align: center;
 
 

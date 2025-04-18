@@ -16,5 +16,8 @@
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.17",
     "thirdweb": "^5.94.2"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^2.1.4"
   }
 }
