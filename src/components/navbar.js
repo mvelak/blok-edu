@@ -81,7 +81,7 @@ const SearchInput = styled.input`
 `;
 
 const ConnectWalletWrapper = styled.div`
-    * {
+    button {
         padding: 0.6rem 1rem;
         border-radius: 12px;
         background-color: rgba(255, 255, 255, 0.08);
@@ -90,7 +90,6 @@ const ConnectWalletWrapper = styled.div`
         font-size: 0.9rem;
         font-weight: 600;
         cursor: pointer;
-        outline: none;
         transition: all 0.2s ease;
         min-width: 110px;
         text-align: center;

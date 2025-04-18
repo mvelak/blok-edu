@@ -9,6 +9,8 @@ const Button = ({ children, ...props }) => {
 }
 
 const StyledButton = styled.button`
+    height: 50px;
+    width: 90px;
     padding: 0.6rem 1rem;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.08);
