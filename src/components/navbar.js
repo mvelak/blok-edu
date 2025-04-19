@@ -3,17 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
-import { createThirdwebClient } from "thirdweb";
-import { ConnectButton } from "thirdweb/react";
 import {DropdownMenu, DropdownWrapper} from "./dropdown";
-import Button from "./button";
+import { Button, WalletButton } from "./button";
 
 const Navbar = () => {
     const router = useRouter();
-
-    const client = createThirdwebClient({
-        clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
-    });
 
     const [query, setQuery] = useState("");
 
@@ -35,7 +29,7 @@ const Navbar = () => {
                          onKeyDown={handleSearch}
             />
             <NavRightSection>
-                <ConnectWalletWrapper><ConnectButton client={client}/></ConnectWalletWrapper>
+                <WalletButton />
                 <DropdownWrapper>
                     <Button>Profile</Button>
                     <DropdownMenu items={[
@@ -98,31 +92,5 @@ const SearchInput = styled.input`
     }
 `;
 
-const ConnectWalletWrapper = styled.div`
-    button {
-        padding: 0.6rem 1rem;
-        border-radius: 12px;
-        background-color: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: white;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        min-width: 110px;
-        text-align: center;
-
-
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.12);
-          border-color: gray;
-        }
-    
-        &:active {
-          transform: scale(0.98);
-        } 
-    }
-`;
 
 export default Navbar;
