@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import styled from "styled-components";
 import { createThirdwebClient } from "thirdweb";
 import { ConnectButton } from "thirdweb/react";
@@ -7,16 +9,31 @@ import {DropdownMenu, DropdownWrapper} from "./dropdown";
 import Button from "./button";
 
 const Navbar = () => {
+    const router = useRouter();
+
     const client = createThirdwebClient({
         clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
     });
+
+    const [query, setQuery] = useState("");
+
+    const handleSearch = (e) => {
+        if (e.key === "Enter") {
+            if (query.trim() === "") return;
+            console.log("Searching for:", query);
+            router.push(`/search/${encodeURIComponent(query)}`);
+        }
+    }
 
     return (
         <Container>
             <Logo href={"/"}>BlokEDU
                 <img src={'/favicon.ico'} width={'20px'} alt="logo"></img>
             </Logo>
-            <SearchInput type="text" placeholder="Search for transcripts"/>
+            <SearchInput type="text" placeholder="Search for schools" value={query}
+                         onChange={(e) => setQuery(e.target.value)}
+                         onKeyDown={handleSearch}
+            />
             <NavRightSection>
                 <ConnectWalletWrapper><ConnectButton client={client}/></ConnectWalletWrapper>
                 <DropdownWrapper>
@@ -60,6 +77,7 @@ const NavRightSection = styled.div`
 `
 
 const SearchInput = styled.input`
+    height: 25px;
     width: 500px;
     padding: 0.6rem 1rem;
     border-radius: 12px;

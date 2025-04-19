@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import SpinningText from "@/components/spinningtext";
 
 const Home = () => {
@@ -42,7 +43,8 @@ const Home = () => {
                     <SpinningText />
                 </BodySubcontainer>
             </BodyContainer>
-            <FooterContainer>Footer Content</FooterContainer>
+            <Footer />
+
         </Container>
     );
 }
@@ -119,9 +121,7 @@ const BodyContent = styled.p`
   margin-bottom: 1.5rem;
 `;
 
-const FooterContainer = styled.div`
-    height: 15vh;
-`;
+
 
 
 export default Home;
