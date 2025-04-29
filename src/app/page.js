@@ -11,10 +11,11 @@ const Home = () => {
             <Navbar />
             <HeroContainer>
                 <HeroHeader>Take Ownership of Your Academic Records</HeroHeader>
-                <HeroBody>Upload and verify transcripts on-chain — secure, transparent, and under your control.</HeroBody>
+                <HeroBody>Access transcripts on-chain — secure, transparent, and under your control.</HeroBody>
             </HeroContainer>
             <BodyContainer>
                 <BodyHeader>How it works.</BodyHeader>
+                <BodyContent>Your school uploads your transcript</BodyContent>
             </BodyContainer>
             <BodyContainer>
                 <BodySubcontainer>
@@ -54,7 +55,6 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    
     color: honeydew;
 `;
 
@@ -68,7 +68,6 @@ const HeroContainer = styled.div`
     align-items: center;
     position: relative;
     overflow: hidden;
-
     &::before {
         content: '';
         position: absolute;
@@ -120,8 +119,5 @@ const BodyContent = styled.p`
   line-height: 1.6;
   margin-bottom: 1.5rem;
 `;
-
-
-
 
 export default Home;

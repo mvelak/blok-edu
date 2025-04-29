@@ -13,7 +13,6 @@ const DropdownMenu = ({ items = [] }) => {
 
 const DropdownWrapper = styled.div`
     position: relative;
-
     &:hover * {
         opacity: 1;
         visibility: visible;

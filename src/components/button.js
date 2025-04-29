@@ -28,7 +28,7 @@ export const WalletButton = () => {
     ];
 
     return (
-        <ButtonWrapper>
+        <ButtonWrapper bgcolor="rgba(255, 255, 255, 0.2)" bghcolor="rgba(255, 255, 255, 0.24)">
             <ConnectButton
                 client={client}
                 wallets={wallets}
@@ -45,9 +45,9 @@ const ButtonWrapper = styled.div`
     button {
         padding: 0.6rem 1rem;
         border-radius: 12px;
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: ${(props) => props.bgcolor || "rgba(255, 255, 255, 0.08)"};
         border: 1px solid rgba(255, 255, 255, 0.15);
-        color: white;
+        color: ${(props) => props.fontcolor || "white"};
         font-family: sans-serif;
         font-size: 0.9rem;
         font-weight: 700;
@@ -55,12 +55,10 @@ const ButtonWrapper = styled.div`
         transition: all 0.2s ease;
         min-width: 110px;
         text-align: center;
-        
         &:hover {
-          background-color: rgba(255, 255, 255, 0.12);
+          background-color: ${(props) => props.bghcolor || "rgba(255, 255, 255, 0.12)"};
           border-color: gray;
         }
-    
         &:active {
           transform: scale(0.98);
         } 

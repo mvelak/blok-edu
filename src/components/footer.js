@@ -8,8 +8,8 @@ const Footer = () => {
                 <p>Own your credentials. Powered by the blockchain.</p>
             </FooterLeft>
             <FooterRight>
-                <FooterLink href="/">Privacy Policy</FooterLink>
-                <FooterLink href="/">Terms of Service</FooterLink>
+                <FooterLink href="/privacy">Privacy Policy</FooterLink>
+                <FooterLink href="/tos">Terms of Service</FooterLink>
                 <FooterLink href="https://github.com/mvelak/blok-edu">GitHub</FooterLink>
                 <FooterLink href="/">Contact</FooterLink>
             </FooterRight>
@@ -56,7 +56,6 @@ const FooterLink = styled.a`
   color: #ccc;
   text-decoration: none;
   font-weight: 500;
-
   &:hover {
     color: dimgray;
   }
