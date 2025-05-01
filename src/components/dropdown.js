@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import Link from "next/link";
 
 const DropdownMenu = ({ items = [] }) => {
     return (
@@ -37,7 +38,7 @@ export const Container = styled.div`
     z-index: 100;
 `;
 
-export const Item = styled.a`
+export const Item = styled(Link)`
     display: block;
     padding: 0.6rem 1rem;
     color: white;

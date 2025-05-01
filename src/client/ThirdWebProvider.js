@@ -3,7 +3,7 @@
 import { ThirdwebProvider } from "thirdweb/react";
 
 const ThirdWebProvider = ({ children }) => {
-    const activeChain = ""
+    const activeChain = "tBNB"
 
     return (
         <ThirdwebProvider

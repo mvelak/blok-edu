@@ -16,20 +16,6 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [ipfsUrl, setIpfsUrl] = useState(null);
 
-    useEffect(() => {
-        const getSigner = async () => {
-            if (!account) return;
-
-            const signer = await ethers6Adapter.signer.toEthers({
-                client: client, chain: "", account: account,
-            });
-
-            const address = await signer.getAddress();
-            console.log("Ethers signer address:", address);
-        };
-
-        getSigner();
-    }, [account]);
 
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
@@ -37,8 +23,12 @@ const Profile = () => {
     };
 
     const handleUpload = async () => {
-        console.log(selectedFile);
-        if (!selectedFile) return;
+        if (!account || !selectedFile) return;
+
+        // Convert from thirdweb account to ether signer
+        const signer = await ethers6Adapter.signer.toEthers({
+            client: client, chain: "", account: account,
+        });
 
         const reader = new FileReader();
 
@@ -56,8 +46,8 @@ const Profile = () => {
                 });
 
                 const { ipfsHash } = await response.json();
-                setIpfsUrl(`https://ipfs.io/ipfs/${ipfsHash}`);
-                // contract = new ethers.Contract("https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/{cid}", abi, signer);
+                setIpfsUrl(`https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${ipfsHash}`);
+                // const contract = new ethers.Contract("", abi, provider);
             } catch (err) {
                 console.error("Upload failed in onloadend:", err);
             }
@@ -69,7 +59,7 @@ const Profile = () => {
     return (
         <Container>
             <UploadBox onClick={() => document.getElementById("file-upload")?.click()}>
-                Click to select a transcript
+                {selectedFile ? `Selected File: ${selectedFile.name}` : "Click to select a transcript"}
                 <FileInput
                     id="file-upload"
                     type="file"
@@ -78,12 +68,7 @@ const Profile = () => {
                 />
             </UploadBox>
 
-            {selectedFile && (
-                <>
-                    <Info>Selected File: {selectedFile.name}</Info>
-                    <Button onClick={handleUpload}>Upload to IPFS</Button>
-                </>
-            )}
+            {selectedFile && (<Button onClick={handleUpload}>Upload to IPFS</Button>)}
 
             {ipfsUrl && (
                 <UploadedURL href={ipfsUrl} target="_blank" rel="noopener noreferrer">
@@ -106,14 +91,11 @@ const UploadBox = styled.div`
     text-align: center;
     cursor: pointer;
     border-radius: 8px;
+    margin: 1rem;
 `;
 
 const FileInput = styled.input`
     display: none;
-`;
-
-const Info = styled.p`
-    font-size: 0.9rem;
 `;
 
 const UploadedURL = styled.a`
