@@ -1,5 +1,6 @@
 import "./globals.css";
 import ThirdWebProvider from "@/client/ThirdWebProvider";
+import PageWrapper from "@/components/pagewrapper";
 
 export const metadata = {
     title: "BlokEDU",
@@ -13,7 +14,9 @@ const RootLayout = ({ children }) => {
     return (
         <html lang="en">
             <body>
-                <ThirdWebProvider>{children}</ThirdWebProvider>
+                <ThirdWebProvider><PageWrapper>
+                    {children}
+                </PageWrapper></ThirdWebProvider>
             </body>
         </html>
     );

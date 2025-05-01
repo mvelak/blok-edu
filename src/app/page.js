@@ -7,13 +7,13 @@ import SpinningText from "@/components/spinningtext";
 
 const Home = () => {
     return (
-        <Container>
+        <>
             <Navbar />
             <HeroContainer>
                 <HeroHeader>Take Ownership of Your Academic Records</HeroHeader>
                 <HeroBody>Access transcripts on-chain — secure, transparent, and under your control.</HeroBody>
             </HeroContainer>
-            <BodyContainer>
+            <BodyContainer flexdirection="column" margintop="15vh">
                 <BodyHeader>How it works.</BodyHeader>
                 <BodyContent>Your school uploads your transcript</BodyContent>
             </BodyContainer>
@@ -45,23 +45,13 @@ const Home = () => {
                 </BodySubcontainer>
             </BodyContainer>
             <Footer />
-
-        </Container>
+        </>
     );
 }
-
-const Container = styled.div`
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    color: honeydew;
-`;
 
 const HeroContainer = styled.div`
     height: 75vh;
     background-image: url("/hero-image.jpg");
-    background-size: 1000vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,45 +69,52 @@ const HeroContainer = styled.div`
     }
 `;
 
-const HeroHeader = styled.div`
+const HeroHeader = styled.h1`
     font-size: 4rem;
     font-weight: 600;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 `;
 
-const HeroBody = styled.div`
+const HeroBody = styled.p`
     font-size: 2rem;
     font-weight: 400;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 `;
 
 const BodyContainer = styled.div`
-    height: 45vh;
+    height: auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: ${(props) => props.flexdirection || "row"};
+    justify-content: center;
     align-items: center;
-    gap: 2rem;
-    padding: 2rem;
+    margin-top: ${(props) => props.margintop || "0"};
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 
 const BodySubcontainer = styled.div`
     flex: 1;
     line-height: 1.6;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 const BodyHeader = styled.h2`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
 `;
 
 const BodyContent = styled.p`
-  font-size: 1rem;
-  color: rgb(210, 210, 210);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: rgb(210, 210, 210);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 `;
 
 export default Home;

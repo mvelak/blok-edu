@@ -5,6 +5,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import {DropdownMenu, DropdownWrapper} from "./dropdown";
 import { Button, WalletButton } from "./button";
+import Link from "next/link";
 
 const Navbar = () => {
     const router = useRouter();
@@ -46,7 +47,7 @@ const Navbar = () => {
 const Container = styled.nav`
     background: rgba(5, 5, 5, 0);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -57,10 +58,10 @@ const Container = styled.nav`
     padding: 0 2rem;
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
     color: honeydew;
     text-decoration: none;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     font-weight: 500;
 `;
 

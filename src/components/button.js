@@ -1,15 +1,15 @@
 "use client";
 
 import styled from "styled-components";
-import {createThirdwebClient} from "thirdweb";
-import {ConnectButton} from "thirdweb/react";
+import { createThirdwebClient } from "thirdweb";
+import { ConnectButton } from "thirdweb/react";
 import { createWallet } from "thirdweb/wallets";
 
 
-export const Button = ({ children }) => {
+export const Button = ({ children, onClick }) => {
     return (
         <ButtonWrapper>
-            <button style={{ height: "50px"}}>{children}</button>
+            <button onClick={onClick} style={{ height: "50px"}}>{children}</button>
         </ButtonWrapper>
     );
 }

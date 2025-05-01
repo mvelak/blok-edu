@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 const Footer = () => {
     return (
@@ -8,8 +9,8 @@ const Footer = () => {
                 <p>Own your credentials. Powered by the blockchain.</p>
             </FooterLeft>
             <FooterRight>
-                <FooterLink href="/privacy">Privacy Policy</FooterLink>
-                <FooterLink href="/tos">Terms of Service</FooterLink>
+                <FooterLink href="/legal/privacy">Privacy Policy</FooterLink>
+                <FooterLink href="/legal/tos">Terms of Service</FooterLink>
                 <FooterLink href="https://github.com/mvelak/blok-edu">GitHub</FooterLink>
                 <FooterLink href="/">Contact</FooterLink>
             </FooterRight>
@@ -20,8 +21,7 @@ const Footer = () => {
 const Container = styled.footer`
     height: 15vh;
     padding: 2rem 4rem;
-    background-color: #111;
-    color: #ccc;
+    background-color: rgb(17, 17, 17);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,7 +52,7 @@ const FooterRight = styled.div`
   gap: 1.5rem;
 `;
 
-const FooterLink = styled.a`
+const FooterLink = styled(Link)`
   color: #ccc;
   text-decoration: none;
   font-weight: 500;

@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer"
 
 const Search = () => {
     return (
@@ -9,6 +10,7 @@ const Search = () => {
             <Navbar />
             <ProfileBackgroundContainer></ProfileBackgroundContainer>
             <p>Search results</p>
+            <Footer />
         </>
     );
 }

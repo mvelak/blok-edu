@@ -6,8 +6,7 @@ import Navbar from "@/components/navbar";
 const Settings = () => {
     return (
         <>
-            <Navbar />
-            <p>Dashboard</p>
+            testingsientelksngaljewk gz.,ezr
         </>
 
     );
