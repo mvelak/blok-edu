@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SpinningText from "@/components/spinningtext";
+import MintFeed from "@/components/feed";
 
 const Home = () => {
     return (
@@ -15,7 +16,7 @@ const Home = () => {
             </HeroContainer>
             <BodyContainer $flexdirection="column" $margintop="15vh">
                 <BodyHeader>How it works.</BodyHeader>
-                <BodyContent>Your school uploads your transcript</BodyContent>
+                <BodyContent>Upload your transcript and information for NFT conversion</BodyContent>
             </BodyContainer>
             <BodyContainer>
                 <BodySubcontainer>
@@ -44,6 +45,7 @@ const Home = () => {
                     <SpinningText />
                 </BodySubcontainer>
             </BodyContainer>
+            <MintFeed />
             <Footer />
         </>
     );
