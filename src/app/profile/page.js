@@ -8,7 +8,7 @@ import { createThirdwebClient } from "thirdweb";
 import { useActiveAccount } from "thirdweb/react";
 import { ethers6Adapter } from "thirdweb/adapters/ethers6";
 import { Button } from "@/components/button";
-import { BLOKSCRIPT_NFT_CONTRACT_ADDRESS } from "@/CENTRAL_VALUES";
+import { BLOKSCRIPT_NFT_CONTRACT_ADDRESS, BACKGROUND_COLOR } from "@/CENTRAL_VALUES";
 
 const Profile = () => {
     const client = createThirdwebClient({ clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID });
@@ -22,7 +22,7 @@ const Profile = () => {
         if (file) setSelectedFile(file);
     };
 
-    const handleUpload = async () => {
+    const handleFileUpload = async () => {
         if (!account || !selectedFile) return;
 
         // Convert from thirdweb account to ethers.js signer
@@ -51,34 +51,49 @@ const Profile = () => {
                 setIpfsUrl(`https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${ipfsHash}`);
                 await contract.safeMint(account.address);
 
+
+
             } catch (err) {
                 console.error("Upload failed in onloadend:", err);
             }
         };
 
         reader.readAsDataURL(selectedFile);
-
-
-
     };
 
     return (
         <Container>
-            {account ? (
-                <UploadContainer onClick={() => document.getElementById("file-upload")?.click()}>
-                    {selectedFile ? `Selected File: ${selectedFile.name}` : "Click to select a transcript"}
-                    <FileInput
-                        id="file-upload"
-                        type="file"
-                        accept=".pdf,.txt,.jpg,.png"
-                        onChange={handleFileChange}
-                    />
-                </UploadContainer>)
+            {account ?
+                <>
+                    <UploadContainer onClick={() => document.getElementById("file-upload")?.click()}>
+                        {selectedFile ? `Selected File: ${selectedFile.name}` : "Click to select a transcript"}
+                        <FileInput
+                            id="file-upload"
+                            type="file"
+                            accept=".pdf,.txt,.jpg,.png"
+                            onChange={handleFileChange}
+                        />
+                    </UploadContainer>
+                    <NameInput>Name</NameInput>
+                    <GPAInput>GPA</GPAInput>
+                    <StandingInput>Standing</StandingInput>
+                    <SemesterInput>Semester</SemesterInput>
+                    <YearInput>Year</YearInput>
+                    <SchoolInput>School</SchoolInput>
+                </>
                 :
-                <UploadContainer>Please Sign In</UploadContainer>
+                <>
+                    <UploadContainer>Please Sign In</UploadContainer>
+                    <NameInput $bg={BACKGROUND_COLOR}/>
+                    <GPAInput $bg={BACKGROUND_COLOR}/>
+                    <StandingInput $bg={BACKGROUND_COLOR}/>
+                    <SemesterInput $bg={BACKGROUND_COLOR}/>
+                    <YearInput $bg={BACKGROUND_COLOR}/>
+                    <SchoolInput $bg={BACKGROUND_COLOR}/>
+                </>
             }
 
-            {selectedFile && (<Button onClick={handleUpload}>Mint NFT</Button>)}
+            {selectedFile && (<Button onClick={handleFileUpload}>Mint NFT</Button>)}
 
             {ipfsUrl && (
                 <UploadedURL href={ipfsUrl} target="_blank" rel="noopener noreferrer">
@@ -113,5 +128,12 @@ const UploadedURL = styled.a`
   display: block;
   margin-top: 1rem;
 `;
+
+const NameInput = styled.input``;
+const GPAInput = styled.input``;
+const StandingInput = styled.input``;
+const SemesterInput = styled.input``;
+const YearInput = styled.input``;
+const SchoolInput = styled.input``;
 
 export default Profile;

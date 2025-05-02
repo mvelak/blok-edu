@@ -2,6 +2,8 @@ import axios from "axios";
 import FormData from "form-data";
 import { NextResponse } from "next/server";
 
+// TODO: add header to incoming json to determine if we are uploading file or json to pinata
+
 export async function POST(req) {
     try {
         const { fileName, fileBase64 } = await req.json();
@@ -31,5 +33,15 @@ export async function POST(req) {
     } catch (error) {
         console.error("Full upload error:", error.response?.data || error);
         return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    }
+}
+
+// TODO: merge this one with the above post func
+export async function POST(req) {
+    try {
+        const jsonObject = JSON.parse
+    }
+    catch (error) {
+
     }
 }
