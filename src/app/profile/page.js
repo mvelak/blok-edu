@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import BlokABI from "@/contracts/abi/BlokscriptABI";
+import Input from "@/components/input";
 import { useState } from "react";
 import { ethers } from "ethers";
 import { createThirdwebClient } from "thirdweb";
@@ -16,6 +17,15 @@ const Profile = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [ipfsUrl, setIpfsUrl] = useState(null);
+
+    const [name, setName] = useState('');
+    const [gpa, setGpa] = useState('');
+    const [standing, setStanding] = useState('');
+    const [semester, setSemester] = useState('');
+    const [year, setYear] = useState('');
+    const [school, setSchool] = useState('');
+
+    const allFieldsFilled = name && gpa && standing && semester && year && school && selectedFile;
 
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
@@ -74,26 +84,60 @@ const Profile = () => {
                             onChange={handleFileChange}
                         />
                     </UploadContainer>
-                    <NameInput>Name</NameInput>
-                    <GPAInput>GPA</GPAInput>
-                    <StandingInput>Standing</StandingInput>
-                    <SemesterInput>Semester</SemesterInput>
-                    <YearInput>Year</YearInput>
-                    <SchoolInput>School</SchoolInput>
+                    <Input 
+                        label="Name"
+                        id="name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        placeholder="Enter your name"
+                    />
+                    <Input 
+                        label="GPA"
+                        id="gpa"
+                        value={gpa}
+                        onChange={e => setGpa(e.target.value)}
+                        placeholder="Enter your GPA"
+                    />
+                    <Input 
+                        label="Standing"
+                        id="standing"
+                        value={standing}
+                        onChange={e => setStanding(e.target.value)}
+                        placeholder="Enter your standing"
+                    />
+                    <Input 
+                        label="Semester"
+                        id="semester"
+                        value={semester}
+                        onChange={e => setSemester(e.target.value)}
+                        placeholder="Enter the semester"
+                    />
+                    <Input 
+                        label="Year"
+                        id="year"
+                        value={year}
+                        onChange={e => setYear(e.target.value)}
+                        placeholder="Enter the year"
+                    />
+                    <Input 
+                        label="School"
+                        id="school"
+                        value={school}
+                        onChange={e => setSchool(e.target.value)}
+                        placeholder="Enter your school"
+                    />
                 </>
                 :
                 <>
                     <UploadContainer>Please Sign In</UploadContainer>
-                    <NameInput $bg={BACKGROUND_COLOR}/>
-                    <GPAInput $bg={BACKGROUND_COLOR}/>
-                    <StandingInput $bg={BACKGROUND_COLOR}/>
-                    <SemesterInput $bg={BACKGROUND_COLOR}/>
-                    <YearInput $bg={BACKGROUND_COLOR}/>
-                    <SchoolInput $bg={BACKGROUND_COLOR}/>
                 </>
             }
 
-            {selectedFile && (<Button onClick={handleFileUpload}>Mint NFT</Button>)}
+            {selectedFile && (
+                <Button onClick={handleFileUpload} disabled={!allFieldsFilled}>
+                    Mint NFT
+                </Button>
+            )}
 
             {ipfsUrl && (
                 <UploadedURL href={ipfsUrl} target="_blank" rel="noopener noreferrer">
@@ -108,6 +152,13 @@ const Container = styled.div`
     padding: 2rem;
     max-width: 600px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(45, 45, 45, 1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
 `;
 
 const UploadContainer = styled.div`
@@ -117,6 +168,15 @@ const UploadContainer = styled.div`
     cursor: pointer;
     border-radius: 8px;
     margin: 1rem;
+    width: 100%;
+    background: rgba(30, 30, 30, 0.95);
+    transition: border 0.2s, background 0.2s;
+    max-width: 400px;
+
+    &:hover {
+        border-color: honeydew;
+        background: rgba(40, 40, 40, 1);
+    }
 `;
 
 const FileInput = styled.input`
@@ -124,16 +184,19 @@ const FileInput = styled.input`
 `;
 
 const UploadedURL = styled.a`
-  text-decoration: underline;
-  display: block;
-  margin-top: 1rem;
-`;
+    text-decoration: underline;
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+    transition: color 0.2s;
+    width: 100%;
+    max-width: 200px;
+    align-self: center;
 
-const NameInput = styled.input``;
-const GPAInput = styled.input``;
-const StandingInput = styled.input``;
-const SemesterInput = styled.input``;
-const YearInput = styled.input``;
-const SchoolInput = styled.input``;
+    &:hover {
+        color: honeydew;
+    }
+`;
 
 export default Profile;
