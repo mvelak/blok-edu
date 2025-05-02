@@ -1,6 +1,11 @@
 {
   "image": "https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/bafkreiea3dprbzemqk6opjqg25munk36twg5dza52ysr2hf2pjbk2nws4i",
-  "name": "Transcript 0",
-  "description": "",
-  "id": "0"
+  "name": "Marco Vela-Koentarjo",
+  "description": "Blokscript by BlokEDU allows you to upload your transcript to a dAPP",
+  "id": 0,
+  "gpa": 3.48,
+  "standing": "Sophomore",
+  "semester": "Fall",
+  "year": 2024,
+  "school": "The Pennsylvania State University"
 }

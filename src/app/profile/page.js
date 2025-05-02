@@ -1,13 +1,14 @@
 "use client";
 
 import styled from "styled-components";
+import BlokABI from "@/contracts/abi/BlokscriptABI";
 import { useState } from "react";
-import ethers from "ethers";
+import { ethers } from "ethers";
 import { createThirdwebClient } from "thirdweb";
 import { useActiveAccount } from "thirdweb/react";
 import { ethers6Adapter } from "thirdweb/adapters/ethers6";
-
 import { Button } from "@/components/button";
+import { BLOKSCRIPT_NFT_CONTRACT_ADDRESS } from "@/CENTRAL_VALUES";
 
 const Profile = () => {
     const client = createThirdwebClient({ clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID });
@@ -29,7 +30,7 @@ const Profile = () => {
             client: client, chain: 97, account: account,
         });
 
-        // const contract = new ethers.Contract(address of contract, abi, signer);
+        const contract = new ethers.Contract(BLOKSCRIPT_NFT_CONTRACT_ADDRESS, BlokABI, signer);
 
         const reader = new FileReader();
 
@@ -48,8 +49,7 @@ const Profile = () => {
 
                 const { ipfsHash } = await response.json();
                 setIpfsUrl(`https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${ipfsHash}`);
-                // contract.safeMint(account.address);
-                // Set URI too
+                await contract.safeMint(account.address);
 
             } catch (err) {
                 console.error("Upload failed in onloadend:", err);
