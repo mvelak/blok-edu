@@ -85,8 +85,7 @@ const PrivacyPolicy = () => {
                     <h2>9. Contact Us</h2>
                     <p>If you have any questions or concerns about this Privacy Policy, please contact us at:</p>
                     <ul>
-                        <li><strong>Email:</strong> [Insert Contact Email]</li>
-                        <li><strong>Website:</strong> [Insert Website URL]</li>
+                        <li><strong>Email:</strong></li>
                     </ul>
                 </section>
             </Section>

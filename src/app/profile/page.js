@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ethers from "ethers";
 import { createThirdwebClient } from "thirdweb";
 import { useActiveAccount } from "thirdweb/react";
@@ -16,7 +16,6 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [ipfsUrl, setIpfsUrl] = useState(null);
 
-
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
         if (file) setSelectedFile(file);
@@ -25,10 +24,12 @@ const Profile = () => {
     const handleUpload = async () => {
         if (!account || !selectedFile) return;
 
-        // Convert from thirdweb account to ether signer
+        // Convert from thirdweb account to ethers.js signer
         const signer = await ethers6Adapter.signer.toEthers({
-            client: client, chain: "", account: account,
+            client: client, chain: 97, account: account,
         });
+
+        // const contract = new ethers.Contract(address of contract, abi, signer);
 
         const reader = new FileReader();
 
@@ -47,28 +48,37 @@ const Profile = () => {
 
                 const { ipfsHash } = await response.json();
                 setIpfsUrl(`https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${ipfsHash}`);
-                // const contract = new ethers.Contract("", abi, provider);
+                // contract.safeMint(account.address);
+                // Set URI too
+
             } catch (err) {
                 console.error("Upload failed in onloadend:", err);
             }
         };
 
         reader.readAsDataURL(selectedFile);
+
+
+
     };
 
     return (
         <Container>
-            <UploadBox onClick={() => document.getElementById("file-upload")?.click()}>
-                {selectedFile ? `Selected File: ${selectedFile.name}` : "Click to select a transcript"}
-                <FileInput
-                    id="file-upload"
-                    type="file"
-                    accept=".pdf,.txt,.jpg,.png"
-                    onChange={handleFileChange}
-                />
-            </UploadBox>
+            {account ? (
+                <UploadContainer onClick={() => document.getElementById("file-upload")?.click()}>
+                    {selectedFile ? `Selected File: ${selectedFile.name}` : "Click to select a transcript"}
+                    <FileInput
+                        id="file-upload"
+                        type="file"
+                        accept=".pdf,.txt,.jpg,.png"
+                        onChange={handleFileChange}
+                    />
+                </UploadContainer>)
+                :
+                <UploadContainer>Please Sign In</UploadContainer>
+            }
 
-            {selectedFile && (<Button onClick={handleUpload}>Upload to IPFS</Button>)}
+            {selectedFile && (<Button onClick={handleUpload}>Mint NFT</Button>)}
 
             {ipfsUrl && (
                 <UploadedURL href={ipfsUrl} target="_blank" rel="noopener noreferrer">
@@ -85,7 +95,7 @@ const Container = styled.div`
     margin: auto;
 `;
 
-const UploadBox = styled.div`
+const UploadContainer = styled.div`
     border: 2px dashed honeydew;
     padding: 2rem;
     text-align: center;

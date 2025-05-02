@@ -24,7 +24,7 @@ const SpinningText = () => {
     }, []);
 
     return (
-        <Circle ref={circleRef} data-text="Smart Transcripts by BlokEDU" />
+        <Circle ref={circleRef} data-text="Smart Transcripts by BlokEDU " />
     );
 };
 

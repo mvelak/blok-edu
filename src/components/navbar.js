@@ -22,9 +22,7 @@ const Navbar = () => {
 
     return (
         <Container>
-            <Logo href={"/"}>BlokEDU
-                <img src={'/favicon.ico'} width={'20px'} alt="logo"></img>
-            </Logo>
+            <Logo href={"/"}><img src={'/logo.png'} width={'150px'} alt="logo" ></img></Logo>
             <SearchInput type="text" placeholder="Search for schools" value={query}
                          onChange={(e) => setQuery(e.target.value)}
                          onKeyDown={handleSearch}
@@ -63,6 +61,7 @@ const Logo = styled(Link)`
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: 500;
+    align-items: center;
 `;
 
 const NavRightSection = styled.div`

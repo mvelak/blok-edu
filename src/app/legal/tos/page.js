@@ -54,7 +54,7 @@ const TermsOfService = () => {
                         <li>By using BlokEDU, you consent to the use of your data for verification purposes and for making it available to third parties with your consent.</li>
                         <li>Sensitive data should be uploaded only when necessary, and users are encouraged to redact personal information not required for transcript validation.</li>
                     </ul>
-                    <p>Refer to our <a href="[Insert Privacy Policy URL]">Privacy Policy</a> for more information.</p>
+                    <p>Refer to our <a href="/legal/privacy">Privacy Policy</a> for more information.</p>
                 </section>
 
                 <section>
@@ -111,8 +111,7 @@ const TermsOfService = () => {
                     <h2>13. Contact Us</h2>
                     <p>If you have any questions about these Terms, you may contact us at:</p>
                     <ul>
-                        <li><strong>Email:</strong> [Insert Contact Email]</li>
-                        <li><strong>Website:</strong> [Insert Website URL]</li>
+                        <li><strong>Email:</strong></li>
                     </ul>
                 </section>
             </Section>

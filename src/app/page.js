@@ -13,7 +13,7 @@ const Home = () => {
                 <HeroHeader>Take Ownership of Your Academic Records</HeroHeader>
                 <HeroBody>Access transcripts on-chain — secure, transparent, and under your control.</HeroBody>
             </HeroContainer>
-            <BodyContainer flexdirection="column" margintop="15vh">
+            <BodyContainer $flexdirection="column" $margintop="15vh">
                 <BodyHeader>How it works.</BodyHeader>
                 <BodyContent>Your school uploads your transcript</BodyContent>
             </BodyContainer>
@@ -84,10 +84,10 @@ const HeroBody = styled.p`
 const BodyContainer = styled.div`
     height: auto;
     display: flex;
-    flex-direction: ${(props) => props.flexdirection || "row"};
+    flex-direction: ${({ $flexdirection }) => $flexdirection || "row"};
     justify-content: center;
     align-items: center;
-    margin-top: ${(props) => props.margintop || "0"};
+    margin-top: ${({ $margintop }) => $margintop || "0"};
 
     @media (max-width: 768px) {
         flex-direction: column;
