@@ -28,12 +28,15 @@ const Profile = () => {
     const allFieldsFilled = name && gpa && standing && semester && year && school && selectedFile;
 
     const handleFileChange = (e) => {
+        console.log(ipfsUrl);
         const file = e.target.files?.[0];
         if (file) setSelectedFile(file);
+        console.log("Fields:", { name, gpa, standing, semester, year, school, selectedFile });
+        console.log("allFieldsFilled:", allFieldsFilled);
     };
 
     const handleFileUpload = async () => {
-        if (!account || !selectedFile) return;
+        if (!account || !allFieldsFilled ) return;
 
         // Convert from thirdweb account to ethers.js signer
         const signer = await ethers6Adapter.signer.toEthers({
@@ -44,28 +47,55 @@ const Profile = () => {
 
         const reader = new FileReader();
 
+
         reader.onloadend = async () => {
             try {
                 const fileBase64 = reader.result;
 
-                const response = await fetch("/api/pinata", {
+                // Upload the transcript image to IPFS
+                const imageResponse = await fetch("/api/pinata", {
                     method: "POST",
-                    headers: {},
+                    headers: {"upload-type": "image"},
                     body: JSON.stringify({
                         fileName: selectedFile.name,
                         fileBase64: fileBase64,
                     }),
                 });
 
-                const { ipfsHash } = await response.json();
-                setIpfsUrl(`https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${ipfsHash}`);
-                await contract.safeMint(account.address);
+                const { ipfsHash: imageIpfsHash } = await imageResponse.json();
+                console.log(imageIpfsHash);
+                const imageUrl = `https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${imageIpfsHash}`;
 
+                // Upload the metadata json to IPFS
+                const metadata = {
+                    image: imageUrl,
+                    name: name,
+                    description: "Blokscript by BlokEDU allows you to upload your transcript to a dAPP",
+                    id: 0,
+                    gpa: gpa,
+                    standing: standing,
+                    semester: semester,
+                    year: year,
+                    school: school
+                };
 
+                const jsonResponse = await fetch("/api/pinata", {
+                    method: "POST",
+                    headers: {"upload-type": "json"},
+                    body: JSON.stringify(metadata),
+                })
+
+                const { ipfsHash: jsonIpfsHash } = await jsonResponse.json();
+                console.log(jsonIpfsHash);
+                setIpfsUrl(`https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${jsonIpfsHash}`);
+
+                await contract.safeMint(account.address, `https://bronze-occasional-ferret-561.mypinata.cloud/ipfs/${jsonIpfsHash}`);
 
             } catch (err) {
                 console.error("Upload failed in onloadend:", err);
             }
+
+
         };
 
         reader.readAsDataURL(selectedFile);
@@ -85,42 +115,36 @@ const Profile = () => {
                         />
                     </UploadContainer>
                     <Input 
-                        label="Name"
                         id="name"
                         value={name}
                         onChange={e => setName(e.target.value)}
                         placeholder="Enter your name"
                     />
                     <Input 
-                        label="GPA"
                         id="gpa"
                         value={gpa}
                         onChange={e => setGpa(e.target.value)}
                         placeholder="Enter your GPA"
                     />
                     <Input 
-                        label="Standing"
                         id="standing"
                         value={standing}
                         onChange={e => setStanding(e.target.value)}
                         placeholder="Enter your standing"
                     />
                     <Input 
-                        label="Semester"
                         id="semester"
                         value={semester}
                         onChange={e => setSemester(e.target.value)}
                         placeholder="Enter the semester"
                     />
                     <Input 
-                        label="Year"
                         id="year"
                         value={year}
                         onChange={e => setYear(e.target.value)}
                         placeholder="Enter the year"
                     />
                     <Input 
-                        label="School"
                         id="school"
                         value={school}
                         onChange={e => setSchool(e.target.value)}
@@ -133,15 +157,15 @@ const Profile = () => {
                 </>
             }
 
-            {selectedFile && (
-                <Button onClick={handleFileUpload} disabled={!allFieldsFilled}>
+            {allFieldsFilled && (
+                <Button onClick={handleFileUpload}>
                     Mint NFT
                 </Button>
             )}
 
             {ipfsUrl && (
                 <UploadedURL href={ipfsUrl} target="_blank" rel="noopener noreferrer">
-                    View uploaded file on IPFS
+                    View on IPFS
                 </UploadedURL>
             )}
         </Container>
