@@ -55,9 +55,9 @@ const TranscriptFeed = () => {
 
     return (
         <FeedContainer>
-            <FeedHeader>📄 Recently Minted Transcripts</FeedHeader>
+            <FeedHeader>Recently Minted Transcripts</FeedHeader>
             {mints.length === 0 ? (
-                <p style={{ color: "gray" }}>No transcripts found yet.</p>
+                <p style={{ color: "gray" }}>No transcripts found</p>
             ) : (
                 mints.map((mint, i) => (
                     <FeedCard key={i}>
